@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>21Day Project</title>
+    <link rel="stylesheet" href="/template/static/css/homepage.css">
+    <script src="/template/static/scripts/DdayCaculater.js"></script>
+    <script src="/template/static/scripts/tableAPI.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <i class="bx bx-badge-check"></i>
+            <h3><a href="/">21Day Project</a></h3>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="goal">
+            <div class="goal-content">
+                <div class="goal-message">
+                    <div class="goal_title">
+                        <h3>My Goal</h3>
+                    </div>
+                    <div class="detail-goal">
+                        <ul>
+                            <li>전 과목 개념 강좌 수강 완료하기</li>
+                            <li>전 과목 수능특강 수강 완료하기</li>
+                            <li>매일 아침 국어 기출 1세트 풀기</li>
+                            <li>수학 4점 기출 문제 풀기</li>
+                            <li>미적분 2~3점 기출 문제 풀기</li>
+                            <li>매일 영어 어휘 30개 암기하기</li>
+                            <li>격일로 영어 듣기 1세트 풀기</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="goal-Dday">
+                    <div class="goal-Dday-title">
+                        <h3>D-Day</h3>
+                    </div>
+                    <div class="dday-list">
+                        <div class="dday-item">
+                            <span>대학수학능력시험</span>
+                            <span id="korean-sat">계산 중..</span>
+                        </div>
+                        <div class="dday-item">
+                            <span>9월 모의평가</span>
+                            <span id="september-sat">계산 중..</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-Wrap">
+            <div class="calendar_title">
+                <h3>Daily Schedule</h3>
+            </div>
+            <div class="table">
+                <table class="calendar">
+                    <tr>
+                        <td>
+                            <div class="day" data-day="1">1</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="2">2</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="3">3</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="4">4</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="5">5</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="6">6</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="7">7</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="day" data-day="8">8</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="9">9</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="10">10</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="11">11</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="12">12</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="13">13</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="14">14</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="day" data-day="15">15</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="16">16</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="17">17</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="18">18</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="19">19</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="20">20</div>
+                        </td>
+                        <td>
+                            <div class="day" data-day="21">21</div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="analysis">
+            <div class="analysis_title">
+                <h3>Plan Analysis</h3>
+            </div>
+            <div class="result">
+                <div class="progressbar">
+                    <p>계획 이행률</p>
+                    <progress class="progress-bar" id="progress" value="50" max="100"></progress>
+                </div>
+                <div class="stats">
+                    <p>총 목표 수: <strong>7개</strong></p>
+                    <p>달성 목표 수: <strong>3개</strong></p>
+                    <p>남은 목표 수: <strong>4개</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const totalPlans = 21;
+            const completedDays = {{ completed_days | tojson | default ('[]')
+        }};
+        const inProgressDays = {{ in_progress_days | tojson | default ('[]') }};
+
+        const completedCount = completedDays.length;
+        const inProgressCount = inProgressDays.length;
+        const remainingCount = totalPlans - completedCount - inProgressCount;
+        const progressPercent = totalPlans > 0 ? Math.round((completedCount / totalPlans) * 100) : 0;
+
+        // progress bar 업데이트
+        const progressBar = document.getElementById('progress');
+        if (progressBar) {
+            progressBar.value = progressPercent;
+            progressBar.max = 100;
+        }
+
+        // 통계 텍스트 업데이트
+        const statsElem = document.querySelector('.stats');
+        if (statsElem) {
+            statsElem.innerHTML = `
+            <p>총 목표 수: <strong>${totalPlans}개</strong></p>
+            <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
+            <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
+            <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
+        `;
+        }
+
+        // 완료된 날 표시
+        completedDays.forEach(dayNum => {
+            const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
+            if (dayElem) {
+                fetch(`/getStudyTime?day=${dayNum}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const st = data.studyTime || { hours: '0', minutes: '0' };
+                        dayElem.textContent = `${st.hours}시간 ${st.minutes}분 ✅`;
+                        dayElem.title = '완벽 달성된 날';
+                    });
+            }
+        });
+
+        // 진행 중인 날 표시
+        inProgressDays.forEach(dayNum => {
+            const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
+            if (dayElem) {
+                fetch(`/getStudyTime?day=${dayNum}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const st = data.studyTime || { hours: '0', minutes: '0' };
+                        dayElem.textContent = `${st.hours}시간 ${st.minutes}분 🔄`;
+                        dayElem.title = '진행 중인 날';
+                    });
+            }
+        });
+});
+    </script>
+
+</body>
+
+</html>
