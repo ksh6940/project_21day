@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Editable Span Test</title>
+<style>
+  .editable {
+    border-bottom: 1px dotted #000;
+    cursor: pointer;
+  }
+  input, textarea {
+    font-size: 1rem;
+    padding: 2px 4px;
+    width: 300px;
+  }
+  textarea {
+    resize: none;
+    height: 3rem;
+  }
+</style>
+</head>
+<body>
+
+<h3>더블클릭으로 편집해보세요</h3>
+
+<div id="container">
+  <span class="editable" id="item1">더블클릭해서 편집해보세요</span>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  function convertToInput(span) {
+    let input;
+
+    if(span.id === 'memo' || span.id === 'comment') {
+      input = document.createElement('textarea');
+      input.style.resize = 'none';
+      input.style.height = '3rem';
+    } else {
+      input = document.createElement('input');
+      input.type = 'text';
+    }
+
+    input.value = span.textContent;
+    if(span.id) input.id = span.id;
+    input.className = span.className;
+
+    input.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' && input.tagName.toLowerCase() !== 'textarea') {
+        e.preventDefault();
+        convertToSpan(input);
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      convertToSpan(input);
+    });
+
+    span.replaceWith(input);
+    input.focus();
+  }
+
+  function convertToSpan(input) {
+    const value = input.value.trim();
+    if(!value) {
+      input.remove();
+      return;
+    }
+
+    const span = document.createElement('span');
+    span.textContent = value;
+    if(input.id) span.id = input.id;
+    span.className = input.className;
+    span.classList.add('editable');
+
+    span.addEventListener('dblclick', () => convertToInput(span));
+
+    input.replaceWith(span);
+  }
+
+  // 기존 editable span에 이벤트 등록
+  document.querySelectorAll('span.editable').forEach(span => {
+    span.addEventListener('dblclick', () => convertToInput(span));
+  });
+
+});
+</script>
+
+</body>
+</html>
