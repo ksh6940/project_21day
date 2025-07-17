@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const selectedDay = daySelect?.value;
 
             if (!selectedDay) {
+<<<<<<< HEAD
                 alert("일차를 선택해주세요!");
                 return;
             }
@@ -22,6 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
             const musicTitle = getInputValue('.input-music-title');
             const musicArtist = getInputValue('.input-music-artist');
             const memo = getInputValue('.input-goal') || getInputValue('#comment');
+=======
+                console.log("일차를 선택해주세요!");
+                return;
+            }
+
+            // 입력값 수집
+            const musicTitle = getInputValue('.input-music-title');
+            const musicArtist = getInputValue('.input-music-artist');
+            const comment = getInputValue('.input-goal') || getInputValue('#comment');
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
             const studyHours = getInputValue('.input-time-hour');
             const studyMinutes = getInputValue('.input-time-minute');
 
@@ -49,12 +60,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const data = {
                 day: selectedDay,
+<<<<<<< HEAD
                 date: dateStr,   // 여기 date 추가
+=======
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
                 music: {
                     title: musicTitle,
                     artist: musicArtist
                 },
+<<<<<<< HEAD
                 memo: memo,
+=======
+                comment: comment,
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
                 studyTime: {
                     hours: studyHours,
                     minutes: studyMinutes
@@ -64,7 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
             fetch('/saveData', {
                 method: 'POST',
+<<<<<<< HEAD
                 headers: { 'Content-Type': 'application/json' },
+=======
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
                 body: JSON.stringify(data)
             })
             .then(response => {
@@ -77,12 +101,19 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error('❌ 저장 실패:', error);
+<<<<<<< HEAD
                 alert('저장 중 오류가 발생했습니다.');
+=======
+                console.log('저장 중 오류가 발생했습니다.');
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
             });
         });
     }
 
+<<<<<<< HEAD
     // span 또는 input 둘 다 값 읽기
+=======
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
     function getInputValue(selector) {
         const span = document.querySelector(`span${selector}`);
         if (span) return span.textContent.trim();
@@ -92,6 +123,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if ('value' in elem) return elem.value.trim();
             else return elem.textContent.trim();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
         return '';
     }
 });

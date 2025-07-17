@@ -37,9 +37,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 오늘의 목표
+<<<<<<< HEAD
             if (data.memo) {
                 const goalInput = document.getElementById('comment');
                 if (goalInput) goalInput.value = data.memo;  // 수정: comment → memo
+=======
+            if (data.comment) {
+                const goalInput = document.getElementById('comment');
+                if (goalInput) goalInput.value = data.comment;
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
             }
 
             // 공부 시간
@@ -121,17 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+<<<<<<< HEAD
     // 저장 버튼 클릭 이벤트 (수정됨)
+=======
+    // 저장 버튼 클릭 이벤트
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
     const saveBtn = document.querySelector('.savebtn');
     if (saveBtn) {
         saveBtn.addEventListener('click', () => {
             const selectedDay = daySelect.value;
 
+<<<<<<< HEAD
             if (!selectedDay) {
                 console.log('저장할 일차를 선택해주세요.');
                 return;
             }
 
+=======
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
             const musicTitle = document.querySelector('.input-music-title')?.value.trim() || '';
             const musicArtist = document.querySelector('.input-music-artist')?.value.trim() || '';
             const comment = document.getElementById('comment')?.value.trim() || '';
@@ -161,7 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     title: musicTitle,
                     artist: musicArtist
                 },
+<<<<<<< HEAD
                 memo: comment, // 서버와 맞춰 memo 사용
+=======
+                comment: comment,
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
                 studyTime: {
                     hours: studyHours,
                     minutes: studyMinutes
@@ -173,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
+<<<<<<< HEAD
             }).then(async res => {
                 try {
                     if (res.status === 204) {
@@ -195,6 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('저장 실패 사유:', err);
                 }
             })
+=======
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.json();
+                })
+                .then(() => console.log('저장 성공!'))
+                .catch(() => console.error('저장 실패!'));
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
         });
     }
 

@@ -57,6 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const newId = `${subject}-${Date.now()}`;
         const todoItem = document.createElement('div');
         todoItem.className = 'todo-item';
+        todoItem.style.display = 'flex';
+        todoItem.style.alignItems = 'center';
+        todoItem.style.justifyContent = 'space-between';
+
+        // 왼쪽 영역: 체크박스 + 라벨
+        const left = document.createElement('div');
+        left.style.display = 'flex';
+        left.style.alignItems = 'center';
+        left.style.gap = '8px';
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -66,29 +75,28 @@ document.addEventListener('DOMContentLoaded', () => {
         label.htmlFor = newId;
         label.textContent = text;
 
-        todoItem.appendChild(checkbox);
-        todoItem.appendChild(label);
+        left.appendChild(checkbox);
+        left.appendChild(label);
+
+        // 오른쪽 영역: X 버튼
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = '✕';
+        removeBtn.style.border = 'none';
+        removeBtn.style.background = 'transparent';
+        removeBtn.style.color = 'red';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.fontSize = '1rem';
+        removeBtn.title = '삭제';
+
+        removeBtn.addEventListener('click', () => {
+            todoItem.remove();
+        });
+
+        todoItem.appendChild(left);
+        todoItem.appendChild(removeBtn);
         list.appendChild(todoItem);
     }
 
-    // input/textarea → span (Enter 시)
-    function convertToSpan(element) {
-        const value = element.value.trim();
-        if (value === '') return;
-
-        const span = document.createElement('span');
-        span.textContent = value;
-
-        // ✅ 기존 클래스 유지
-        element.classList.forEach(cls => span.classList.add(cls));
-        span.classList.add('converted-text');
-
-        span.title = "더블클릭해서 수정 가능";
-        span.style.cursor = "pointer";
-
-        span.addEventListener('dblclick', () => convertToInput(span));
-        element.replaceWith(span);
-    }
 
     // span → input/textarea (더블클릭 시 복원)
     function convertToInput(span) {

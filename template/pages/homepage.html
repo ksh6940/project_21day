@@ -197,11 +197,19 @@
         const statsElem = document.querySelector('.stats');
         if (statsElem) {
             statsElem.innerHTML = `
+<<<<<<< HEAD
                 <p>총 목표 수: <strong>${totalPlans}개</strong></p>
                 <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
                 <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
                 <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
             `;
+=======
+            <p>총 목표 수: <strong>${totalPlans}개</strong></p>
+            <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
+            <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
+            <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
+        `;
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
         }
 
         // 완료된 날 표시
@@ -214,8 +222,12 @@
                         const st = data.studyTime || { hours: '0', minutes: '0' };
                         dayElem.textContent = `${st.hours}시간 ${st.minutes}분 ✅`;
                         dayElem.title = '완벽 달성된 날';
+<<<<<<< HEAD
                     })
                     .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
+=======
+                    });
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
             }
         });
 
@@ -229,12 +241,21 @@
                         const st = data.studyTime || { hours: '0', minutes: '0' };
                         dayElem.textContent = `${st.hours}시간 ${st.minutes}분 🔄`;
                         dayElem.title = '진행 중인 날';
+<<<<<<< HEAD
                     })
                     .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
             }
         });
     });
     </script>
+=======
+                    });
+            }
+        });
+});
+    </script>
+
+>>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
 </body>
 
 </html>
