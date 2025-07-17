@@ -10,27 +10,15 @@
     <script src="/template/static/scripts/DdayCaculater.js"></script>
     <script src="/template/static/scripts/tableAPI.js"></script>
     <link rel="icon" href="/template/static/img/calendar.png" type="image/png" />
-    <!-- 문서 설명 (SEO에 도움) -->
     <meta name="description" content="21Day Project: 21일간 목표 달성을 돕는 일정 및 계획 관리 웹사이트">
-
-    <!-- 키워드 (검색엔진 최적화 참고용) -->
     <meta name="keywords" content="21day project, 목표관리, 공부계획, 일정, D-day, 학습관리">
-
-    <!-- 작성자 정보 -->
     <meta name="author" content="seogo">
-
-    <!-- Open Graph (SNS 공유 시 썸네일 및 정보) -->
     <meta property="og:title" content="21Day Project" />
     <meta property="og:description" content="21일간 목표 달성을 돕는 일정 및 계획 관리 웹사이트" />
-
-    <!-- Twitter 카드 (트위터 공유 시 표시) -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="21Day Project" />
     <meta name="twitter:description" content="21일간 목표 달성을 돕는 일정 및 계획 관리 웹사이트" />
-
-    <!-- IE 호환성 (필요 시) -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
 </head>
 
 <body>
@@ -85,73 +73,31 @@
             <div class="table">
                 <table class="calendar">
                     <tr>
-                        <td>
-                            <div class="day" data-day="1">1</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="2">2</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="3">3</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="4">4</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="5">5</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="6">6</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="7">7</div>
-                        </td>
+                        <td><div class="day" data-day="1">1</div></td>
+                        <td><div class="day" data-day="2">2</div></td>
+                        <td><div class="day" data-day="3">3</div></td>
+                        <td><div class="day" data-day="4">4</div></td>
+                        <td><div class="day" data-day="5">5</div></td>
+                        <td><div class="day" data-day="6">6</div></td>
+                        <td><div class="day" data-day="7">7</div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="day" data-day="8">8</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="9">9</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="10">10</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="11">11</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="12">12</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="13">13</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="14">14</div>
-                        </td>
+                        <td><div class="day" data-day="8">8</div></td>
+                        <td><div class="day" data-day="9">9</div></td>
+                        <td><div class="day" data-day="10">10</div></td>
+                        <td><div class="day" data-day="11">11</div></td>
+                        <td><div class="day" data-day="12">12</div></td>
+                        <td><div class="day" data-day="13">13</div></td>
+                        <td><div class="day" data-day="14">14</div></td>
                     </tr>
                     <tr>
-                        <td>
-                            <div class="day" data-day="15">15</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="16">16</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="17">17</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="18">18</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="19">19</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="20">20</div>
-                        </td>
-                        <td>
-                            <div class="day" data-day="21">21</div>
-                        </td>
+                        <td><div class="day" data-day="15">15</div></td>
+                        <td><div class="day" data-day="16">16</div></td>
+                        <td><div class="day" data-day="17">17</div></td>
+                        <td><div class="day" data-day="18">18</div></td>
+                        <td><div class="day" data-day="19">19</div></td>
+                        <td><div class="day" data-day="20">20</div></td>
+                        <td><div class="day" data-day="21">21</div></td>
                     </tr>
                 </table>
             </div>
@@ -166,96 +112,70 @@
                     <p>계획 이행률</p>
                     <progress class="progress-bar" id="progress" value="50" max="100"></progress>
                 </div>
-                <div class="stats">
-                    <p>총 목표 수: <strong>7개</strong></p>
-                    <p>달성 목표 수: <strong>3개</strong></p>
-                    <p>남은 목표 수: <strong>4개</strong></p>
-                </div>
+                <div class="stats"></div>
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const totalPlans = 21;
-            const completedDays = {{ completed_days | tojson | default ('[]')
-        }};
-        const inProgressDays = {{ in_progress_days | tojson | default ('[]') }};
+            const completedDays = {{ completed_days | tojson | default('[]') }};
+            const inProgressDays = {{ in_progress_days | tojson | default('[]') }};
 
-        const completedCount = completedDays.length;
-        const inProgressCount = inProgressDays.length;
-        const remainingCount = totalPlans - completedCount - inProgressCount;
-        const progressPercent = totalPlans > 0 ? Math.round((completedCount / totalPlans) * 100) : 0;
+            const completedCount = completedDays.length;
+            const inProgressCount = inProgressDays.length;
+            const remainingCount = totalPlans - completedCount - inProgressCount;
+            const progressPercent = totalPlans > 0 ? Math.round((completedCount / totalPlans) * 100) : 0;
 
-        // progress bar 업데이트
-        const progressBar = document.getElementById('progress');
-        if (progressBar) {
-            progressBar.value = progressPercent;
-            progressBar.max = 100;
-        }
-
-        // 통계 텍스트 업데이트
-        const statsElem = document.querySelector('.stats');
-        if (statsElem) {
-            statsElem.innerHTML = `
-<<<<<<< HEAD
-                <p>총 목표 수: <strong>${totalPlans}개</strong></p>
-                <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
-                <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
-                <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
-            `;
-=======
-            <p>총 목표 수: <strong>${totalPlans}개</strong></p>
-            <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
-            <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
-            <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
-        `;
->>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
-        }
-
-        // 완료된 날 표시
-        completedDays.forEach(dayNum => {
-            const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
-            if (dayElem) {
-                fetch(`/getStudyTime?day=${dayNum}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const st = data.studyTime || { hours: '0', minutes: '0' };
-                        dayElem.textContent = `${st.hours}시간 ${st.minutes}분 ✅`;
-                        dayElem.title = '완벽 달성된 날';
-<<<<<<< HEAD
-                    })
-                    .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
-=======
-                    });
->>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
+            const progressBar = document.getElementById('progress');
+            if (progressBar) {
+                progressBar.value = progressPercent;
+                progressBar.max = 100;
             }
-        });
 
-        // 진행 중인 날 표시
-        inProgressDays.forEach(dayNum => {
-            const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
-            if (dayElem) {
-                fetch(`/getStudyTime?day=${dayNum}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        const st = data.studyTime || { hours: '0', minutes: '0' };
-                        dayElem.textContent = `${st.hours}시간 ${st.minutes}분 🔄`;
-                        dayElem.title = '진행 중인 날';
-<<<<<<< HEAD
-                    })
-                    .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
+            const statsElem = document.querySelector('.stats');
+            if (statsElem) {
+                statsElem.innerHTML = `
+                    <p>총 목표 수: <strong>${totalPlans}개</strong></p>
+                    <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
+                    <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
+                    <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
+                `;
             }
+
+            completedDays.forEach(dayNum => {
+                const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
+                if (dayElem) {
+                    fetch(`/getStudyTime?day=${dayNum}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            const st = data.studyTime || { hours: '0', minutes: '0' };
+                            dayElem.textContent = `${st.hours}시간 ${st.minutes}분 ✅`;
+                            dayElem.title = '완벽 달성된 날';
+                        })
+                        .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
+                }
+            });
+
+            inProgressDays.forEach(dayNum => {
+                const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
+                if (dayElem) {
+                    fetch(`/getStudyTime?day=${dayNum}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            const st = data.studyTime || { hours: '0', minutes: '0' };
+                            dayElem.textContent = `${st.hours}시간 ${st.minutes}분 🔄`;
+                            dayElem.title = '진행 중인 날';
+                        })
+                        .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
+                }
+            });
         });
-    });
-    </script>
-=======
-                    });
-            }
-        });
-});
     </script>
 
->>>>>>> 99db3c703f14bffa6d41302cc5539f4f850b2fc5
+    <!-- 🟢 이 아래에 계획 추가/삭제 관련 JS를 연결하면 됩니다 -->
+    <script src="/template/static/scripts/planHandler.js"></script>
 </body>
 
 </html>
