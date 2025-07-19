@@ -6,10 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <title>21Day Project</title>
-    <link rel="stylesheet" href="/template/static/css/homepage.css">
+    <link rel="stylesheet" href="/template/static/css/common.css">
     <link rel="stylesheet" href="/template/static/css/scheduler.css">
-    <script src="/template/static/scripts/DdayCaculater.js"></script>
-    <script src="/template/static/scripts/planerAPI.js"></script>
     <link rel="icon" href="/template/static/img/calendar.png" type="image/png" />
     <!-- 문서 설명 (SEO에 도움) -->
     <meta name="description" content="21Day Project: 21일간 목표 달성을 돕는 일정 및 계획 관리 웹사이트">
@@ -72,11 +70,10 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     const homeBtn = document.querySelector('.homebtn');
                     const deletebtn = document.querySelector('.deletebtn');
-                    const day = "{{ day }}";
                     const daySelect = document.getElementById('day-select');
 
-                    if (day && daySelect) {
-                        daySelect.value = day;
+                    if (window.currentDay && daySelect) {
+                        daySelect.value = window.currentDay;
                     }
 
                     if (homeBtn) {
@@ -92,7 +89,23 @@
                                 alert('삭제할 일차를 선택해주세요.');
                                 return;
                             }
-                            window.location.href = `/deleteData?day=${encodeURIComponent(selectedDay)}`;
+                            
+                            if (confirm(`정말로 ${selectedDay}일차 데이터를 삭제하시겠습니까?`)) {
+                                fetch(`/deleteData?day=${encodeURIComponent(selectedDay)}`, {
+                                    method: 'DELETE'
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    alert(data.message);
+                                    if (data.message === '삭제 성공') {
+                                        window.location.href = '/';
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert('삭제 중 오류가 발생했습니다.');
+                                });
+                            }
                         });
                     }
                 });
@@ -103,7 +116,7 @@
     <div class="main">
         <div class="planner">
             <div class="section-date">
-                <h2><i class='bx bx-calendar-alt'></i> <span id="today-date">날짜 불러오는 중...</span></h2>
+                <h2><i class='bx bx-calendar-alt'></i> <span id="today-date"></span></h2>
             </div>
 
             <div class="section-music">
@@ -167,8 +180,9 @@
         window.currentDay = "{{ day }}";
     </script>
 
+    <script src="/template/static/scripts/dday.js"></script>
+    <script src="/template/static/scripts/planManager.js"></script>
     <script src="/template/static/scripts/getFile.js"></script>
-    <script src="/template/static/scripts/CreateScheduler.js"></script>
     <script src="/template/static/scripts/planerAPI.js"></script>
 </body>
 

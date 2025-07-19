@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <title>21Day Project</title>
+    <link rel="stylesheet" href="/template/static/css/common.css">
     <link rel="stylesheet" href="/template/static/css/homepage.css">
-    <script src="/template/static/scripts/DdayCaculater.js"></script>
-    <script src="/template/static/scripts/tableAPI.js"></script>
     <link rel="icon" href="/template/static/img/calendar.png" type="image/png" />
     <meta name="description" content="21Day Project: 21일간 목표 달성을 돕는 일정 및 계획 관리 웹사이트">
     <meta name="keywords" content="21day project, 목표관리, 공부계획, 일정, D-day, 학습관리">
@@ -118,65 +117,12 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const totalPlans = 21;
-            const completedDays = {{ completed_days | tojson | default('[]') }};
-            const inProgressDays = {{ in_progress_days | tojson | default('[]') }};
-
-            const completedCount = completedDays.length;
-            const inProgressCount = inProgressDays.length;
-            const remainingCount = totalPlans - completedCount - inProgressCount;
-            const progressPercent = totalPlans > 0 ? Math.round((completedCount / totalPlans) * 100) : 0;
-
-            const progressBar = document.getElementById('progress');
-            if (progressBar) {
-                progressBar.value = progressPercent;
-                progressBar.max = 100;
-            }
-
-            const statsElem = document.querySelector('.stats');
-            if (statsElem) {
-                statsElem.innerHTML = `
-                    <p>총 목표 수: <strong>${totalPlans}개</strong></p>
-                    <p>완벽 달성 목표 수: <strong>${completedCount}개</strong></p>
-                    <p>진행 중 목표 수: <strong>${inProgressCount}개</strong></p>
-                    <p>남은 목표 수: <strong>${remainingCount}개</strong></p>
-                `;
-            }
-
-            completedDays.forEach(dayNum => {
-                const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
-                if (dayElem) {
-                    fetch(`/getStudyTime?day=${dayNum}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const st = data.studyTime || { hours: '0', minutes: '0' };
-                            dayElem.textContent = `${st.hours}시간 ${st.minutes}분 ✅`;
-                            dayElem.title = '완벽 달성된 날';
-                        })
-                        .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
-                }
-            });
-
-            inProgressDays.forEach(dayNum => {
-                const dayElem = document.querySelector(`.day[data-day="${dayNum}"]`);
-                if (dayElem) {
-                    fetch(`/getStudyTime?day=${dayNum}`)
-                        .then(res => res.json())
-                        .then(data => {
-                            const st = data.studyTime || { hours: '0', minutes: '0' };
-                            dayElem.textContent = `${st.hours}시간 ${st.minutes}분 🔄`;
-                            dayElem.title = '진행 중인 날';
-                        })
-                        .catch(err => console.error(`Failed to fetch study time for day ${dayNum}:`, err));
-                }
-            });
-        });
+        window.completed_days = {{ completed_days | tojson | default('[]') }};
+        window.in_progress_days = {{ in_progress_days | tojson | default('[]') }};
     </script>
-
-    <!-- 🟢 이 아래에 계획 추가/삭제 관련 JS를 연결하면 됩니다 -->
-    <script src="/template/static/scripts/tableAPI.js"></script>
-    <script src="/template/static/scripts/DdayCaculater.js"></script>
+    <script src="/template/static/scripts/homepage.js"></script>
+    <script src="/template/static/scripts/calendar.js"></script>
+    <script src="/template/static/scripts/dday.js"></script>
 </body>
 
 </html>
