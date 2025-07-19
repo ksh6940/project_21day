@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'GangwonEduSaeeum_OTFMediumA';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: 'GangwonEduSaeeum_OTFMediumA', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+body {
+  background-color: #ffffff;
+  color: #111;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 16px 0;
+  margin-bottom: 30px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title i {
+  font-size: 36px;
+  color: #000;
+}
+
+.title h3 {
+  font-size: 2rem;
+  color: #000;
+}
+
+.export {
+  display: flex;
+  gap: 10px;
+}
+
+.export button {
+  background-color: transparent;
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.export button i {
+  font-size: 18px;
+  color: #000;
+}
+
+.export button:hover {
+  background-color: #000;
+}
+
+.export button:hover i {
+  color: #fff;
+}

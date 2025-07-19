@@ -1,83 +1,4 @@
-@font-face {
-  font-family: 'GangwonEduSaeeum_OTFMediumA';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduSaeeum_OTFMediumA.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-* {
-  font-family: 'GangwonEduSaeeum_OTFMediumA';
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none; /* 밑줄 제거 */
-  color: inherit;        /* 부모 요소의 글자색을 따름 */
-  cursor: pointer;       /* 마우스 포인터는 손 모양 */
-}
-
-
-body {
-  background-color: #ffffff;
-  color: #111;
-  padding: 20px;
-}
-
-/* ---------------- Header ---------------- */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
-  padding: 16px 0;
-  margin-bottom: 30px;
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.title i {
-  font-size: 36px;
-  color: #000;
-}
-
-.title h3 {
-  font-size: 2rem;
-  color: #000;
-}
-
-.export {
-  display: flex;
-  gap: 10px;
-}
-
-.export button {
-  background-color: transparent;
-  border: 1px solid #000;
-  border-radius: 6px;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.export button i {
-  font-size: 18px;
-  color: #000;
-}
-
-.export button:hover {
-  background-color: #000;
-}
-
-.export button:hover i {
-  color: #fff;
-}
+@import url('./common.css');
 
 /* ---------------- Goal Section ---------------- */
 .goal {
@@ -98,8 +19,6 @@ body {
 .goal-message,
 .goal-Dday {
   flex: 1;
-  padding: 0;
-  margin: 0;
 }
 
 .goal_title, .goal-Dday-title {
@@ -125,17 +44,17 @@ body {
   justify-content: space-between;
   font-size: 1.1rem;
   color: #111;
-  font-weight: normal;       
+  font-weight: normal;
   padding: 8px 12px;
   border-radius: 8px;
-  background-color: transparent; 
-  box-shadow: none;               
+  background-color: transparent;
+  box-shadow: none;
   transition: background-color 0.2s ease;
 }
 
 .dday-item span:last-child {
-  font-weight: normal;      
-  color: #111;             
+  font-weight: normal;
+  color: #111;
 }
 
 .detail-goal ul {
@@ -157,8 +76,8 @@ body {
 /* ---------------- Calendar Section ---------------- */
 .calendar-Wrap {
     width: 80%;
-    margin: 40px auto; 
-    display: block; 
+    margin: 40px auto;
+    display: block;
 }
 
 .calendar_title {

@@ -1,9 +1,4 @@
-* {
-  font-family: 'GangwonEduSaeeum_OTFMediumA', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import url('./common.css');
 
 /* --- 기본 스타일 --- */
 .planner {

@@ -3,38 +3,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (saveBtn) {
         saveBtn.addEventListener('click', function () {
+            saveBtn.disabled = true;
             const daySelect = document.getElementById('day-select');
             const selectedDay = daySelect?.value;
 
             if (!selectedDay) {
                 alert("일차를 선택해주세요!");
+                saveBtn.disabled = false;
                 return;
             }
 
-            // 오늘 날짜 계산 (YYYY-MM-DD)
             const today = new Date();
             const yyyy = today.getFullYear();
             const mm = String(today.getMonth() + 1).padStart(2, '0');
             const dd = String(today.getDate()).padStart(2, '0');
             const dateStr = `${yyyy}-${mm}-${dd}`;
 
-            // 입력값 수집
             const musicTitle = getInputValue('.input-music-title');
             const musicArtist = getInputValue('.input-music-artist');
             const memo = getInputValue('.input-goal') || getInputValue('#comment');
             const studyHours = getInputValue('.input-time-hour');
             const studyMinutes = getInputValue('.input-time-minute');
 
-            // 계획 수집
             const planItems = [];
             document.querySelectorAll('.todo-item').forEach(item => {
-                const label = item.querySelector('label');
+                const label = item.querySelector('span.editable');
                 const checkbox = item.querySelector('input[type="checkbox"]');
                 const subjectBlock = item.closest('.subject-plan');
                 let subject = '기타';
 
                 if (subjectBlock) {
-                    const id = subjectBlock.id || ''; // e.g., "subject-korean"
+                    const id = subjectBlock.id || '';
                     subject = id.replace('subject-', '') || '기타';
                 }
 
@@ -49,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const data = {
                 day: selectedDay,
-                date: dateStr,   // 여기 date 추가
+                date: dateStr,
                 music: {
                     title: musicTitle,
                     artist: musicArtist
@@ -78,11 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(error => {
                 console.error('❌ 저장 실패:', error);
                 alert('저장 중 오류가 발생했습니다.');
+            })
+            .finally(() => {
+                saveBtn.disabled = false;
             });
         });
     }
 
-    // span 또는 input 둘 다 값 읽기
     function getInputValue(selector) {
         const span = document.querySelector(`span${selector}`);
         if (span) return span.textContent.trim();
