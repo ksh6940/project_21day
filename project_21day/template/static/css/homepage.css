@@ -181,3 +181,76 @@
 .stats p {
   margin: 4px 0;
 }
+
+/* ---------------- Responsive Design ---------------- */
+@media (max-width: 1024px) {
+  .goal, .calendar-Wrap, .analysis {
+    width: 90%;
+  }
+
+  .goal_title, .goal-Dday-title, .calendar_title, .analysis_title {
+    font-size: 1.2rem;
+  }
+
+  .calendar td {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .goal, .calendar-Wrap, .analysis {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .goal-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .goal_title, .goal-Dday-title, .calendar_title, .analysis_title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+
+  .dday-item {
+    font-size: 1rem;
+  }
+
+  .calendar th, .calendar td {
+    font-size: 0.9rem;
+  }
+
+  .calendar td {
+    height: 60px;
+  }
+
+  .day {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .goal, .calendar-Wrap, .analysis {
+    width: 100%;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .goal_title, .goal-Dday-title, .calendar_title, .analysis_title {
+    font-size: 1rem;
+  }
+
+  .calendar th, .calendar td {
+    font-size: 0.8rem;
+  }
+
+  .calendar td {
+    height: 50px;
+  }
+
+  .day {
+    padding: 0.5rem;
+  }
+}

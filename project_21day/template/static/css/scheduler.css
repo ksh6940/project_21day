@@ -214,3 +214,54 @@ textarea {
     resize: none !important;
 }
 
+/* ---------------- Responsive Design ---------------- */
+@media (max-width: 1024px) {
+  .planner {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .planner {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .planner h2 {
+    font-size: 1.5rem;
+  }
+
+  .plan-input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .plan-input-group input[type="text"] {
+    min-width: 100%;
+  }
+
+  .music-input-line input[type="text"] {
+    width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .planner h2 {
+    font-size: 1.3rem;
+  }
+
+  .planner label {
+    font-size: 0.9rem;
+  }
+
+  .planner textarea#comment,
+  .planner input[type="text"],
+  .planner input[type="time"] {
+    font-size: 0.9rem;
+  }
+
+  .todo-item label {
+    font-size: 0.9rem;
+  }
+}
+
